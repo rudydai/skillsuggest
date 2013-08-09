@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from scraper.skill_scraper import find_best_skills, get_url_list, get_personal_skills
 import requests
 import json
 import urllib, urllib2
@@ -9,6 +10,7 @@ client_id = "m70mm27vpve4"
 client_secret = "dSP3GwJhL9UZWjGJ"
 
 profile_api_endpoint = "https://api.linkedin.com/v1/people/~/connections:(public-profile-url)"
+own_skills_endpoint = "https://api.linkedin.com/v1/people/~:(skills)"
 
 def auth(request):
     return render(request, "welcome.html")
@@ -32,23 +34,27 @@ def get_token(request):
             "client_secret" : client_secret
         }
         post_url = auth_url + "?grant_type={0}&code={1}&redirect_uri={2}&client_id={3}&client_secret={4}".format(data["grant_type"], data["code"], data["redirect_uri"], data["client_id"], data["client_secret"])
-        print post_url
         r = requests.post(post_url)
 #print auth_url+urllib.urlencode(data)
 #r = requests.post(auth_url, data=data)
 #r = urllib2.urlopen(auth_url, urllib.urlencode(data))
-        print r
-        print r.text
         if r.status_code != requests.codes.ok:
             print "problem occured getting auth token"
         r = json.loads(r.text)
         token = r.get("access_token", None)
         if token is None:
             return render(request, "auth_fail.html", {"error": "could not acquire token"})
+        print "requesting connections data"
         basic_data = requests.get(profile_api_endpoint+"?oauth2_access_token={0}".format(token))
-        print basic_data
-        print basic_data.text
-        return HttpResponse(basic_data.text)
+        url_list = get_url_list(basic_data.text)
+#print url_list
+        print "requesting skills data"
+        own_data = requests.get(own_skills_endpoint+"?oauth2_access_token={0}".format(token))
+        own_list = get_personal_skills(own_data.text)
+#print own_list
+        print "processing lists"
+        best_list = find_best_skills(url_list, own_list)
+        return HttpResponse(str(best_list))
     else:
         return render(request, "please_wait.html")
 
