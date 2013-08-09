@@ -54,6 +54,8 @@ def get_token(request):
 #print own_list
         print "processing lists"
         best_list = find_best_skills(url_list, own_list)
+        best_list = best_list.items()
+        best_list.sort(key=lambda(x):x[1],reverse=True)
         return HttpResponse(str(best_list))
     else:
         return render(request, "please_wait.html")
