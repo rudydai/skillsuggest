@@ -2,10 +2,7 @@ from bs4 import BeautifulSoup
 import json
 import urllib
 
-#person based, or adjacency matrix of skills...store this matrix in DB for all to use??
-# to make faster, could have entries to adjacency matrix from connections that have at least 1 in common
-#or, adjacency matrix with entries on one row as only your skills
-#so, more like a coincidence matrix, keys are your skills... add skills of people who have one in common
+coursera_courses_json = json.loads(urllib.urlopen("https://www.coursera.org/maestro/api/topic/list?full=1").read())
 
 def get_url_list(xml):
     soup = BeautifulSoup(xml)
@@ -38,12 +35,23 @@ def find_best_skills(connections_url_list,personal_skill_set):
                 elif element not in personal_skill_set and element not in weighted_skills_dictionary:
                     weighted_skills_dictionary[element] = weight
     return weighted_skills_dictionary
-	#print (skill_list)
-	#coursera url https://www.coursera.org/course/publicspeak
-	#fetch from that JSON page, the names and descriptions.. look for hits and give links to the URL
-	#using the shortname attribute
-	#add some nice UI (twitter bootstrap)
-
 #psuedocode: go through each connection and get their skills.
 #if there's at least one in common with yours then, add all their skills to personal[commonskill]
 #add the skill to the inner dictionary, or if already present, increase weight by 1
+
+def find_related_courses(skills_list):
+    related_courses_list = []
+    for skill in skills_list:
+        for course in coursera_courses_json:
+            if course["name"].find(skill) or course["short_description"].find(skill) or course["category-ids"].find(skill):
+                related_courses_list.append(course["courses"][0]["home_link"])
+               # break
+            for category in course["categories"]:
+                if category["name"].find(skill):
+                    related_courses_list.append(course["courses"][0]["home_link"])
+                    #break
+    return related_courses_list
+
+#skills = ['algorithms', 'databases', 'economics', 'genetic']
+#p = find_related_courses(skills)
+#print p
