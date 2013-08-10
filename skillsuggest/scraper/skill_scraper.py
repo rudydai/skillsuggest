@@ -43,7 +43,7 @@ def find_related_courses(skills_list):
     related_courses_list = []
     for skill in skills_list:
         for course in coursera_courses_json:
-            if course["name"].find(skill) or course["short_description"].find(skill) or course["category-ids"].find(skill):
+            if course["name"].find(skill) or course["category-ids"].find(skill):
                 related_courses_list.append(course["courses"][0]["home_link"])
                # break
             for category in course["categories"]:
