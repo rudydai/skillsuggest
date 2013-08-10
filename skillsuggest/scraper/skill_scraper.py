@@ -42,6 +42,8 @@ def find_best_skills(connections_url_list,personal_skill_set):
 def find_related_courses(skills_list):
     related_courses_list = []
     for skill in skills_list:
+        if len(skill) <= 3:
+            skill = " " + skill + " "
         for course in coursera_courses_json:
             if skill in course["name"] or skill in course["category-ids"] or skill in course["courses"][0]["certificate_description"]:
                 if course["courses"][0]["home_link"] not in related_courses_list:
@@ -54,7 +56,9 @@ def find_related_courses(skills_list):
                     #break
     return related_courses_list
 
-skills = ['algorithms', 'databases', 'economics', 'genetic']
-p = find_related_courses(skills)
-print p
-print len(p)
+#test script
+#skills = ['machine learning', 'algorithms', 'databases', 'git', 'C']
+#p = find_related_courses(skills)
+#for thing in p:
+ #  print thing
+#print len(p)
