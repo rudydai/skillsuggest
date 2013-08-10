@@ -3,6 +3,7 @@ import json
 import urllib
 
 coursera_courses_json = json.loads(urllib.urlopen("https://www.coursera.org/maestro/api/topic/list?full=1").read())
+coursera_class_base_url = "https://www.coursera.org/course/"
 
 def get_url_list(xml):
     soup = BeautifulSoup(xml)
@@ -47,18 +48,19 @@ def find_related_courses(skills_list):
         for course in coursera_courses_json:
             if skill in course["name"] or skill in course["category-ids"] or skill in course["courses"][0]["certificate_description"]:
                 if course["courses"][0]["home_link"] not in related_courses_list:
-                   related_courses_list.append(course["courses"][0]["home_link"])
+                   related_courses_list.append(coursera_class_base_url + course["short_name"])
                # break
             for category in course["categories"]:
                 if skill in category["name"]:
                     if course["courses"][0]["home_link"] not in related_courses_list:
-                        related_courses_list.append(course["courses"][0]["home_link"])
+                        related_courses_list.append(coursera_class_base_url + course["short_name"])
                     #break
     return related_courses_list
 
 #test script
-#skills = ['machine learning', 'algorithms', 'databases', 'git', 'C']
-#p = find_related_courses(skills)
-#for thing in p:
- #  print thing
-#print len(p)
+skills = ['neuroscience']
+skills2= ['machine learning', 'algorithms', 'databases', 'git', 'C', 'economics', 'neuroscience']
+p = find_related_courses(skills)
+for thing in p:
+   print thing
+print len(p)
