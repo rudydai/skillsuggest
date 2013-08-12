@@ -1,0 +1,29 @@
+<html>
+
+<head>
+<title>Your results!</title>
+
+</head>
+
+<body>
+Here are your top 10 skills to learn, as suggested by your social network: <br>
+
+<ul>
+{% for skill in skill_list %}
+    <li>{{ skill }}</li>
+{% endfor %}
+</ul>
+
+<br>
+Here are your top 10 suggested Coursera courses:
+<ul>
+{% for course in course_list %}
+    <li><a href= "{{ course_list.course.0 }}">{{ course }}</li>
+    <br>
+    <img src= "{{ course_list.course.1 }}">
+{% endfor %}
+</ul> 
+
+</body>
+
+</html>
