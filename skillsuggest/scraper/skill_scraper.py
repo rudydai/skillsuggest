@@ -45,22 +45,26 @@ def find_related_courses(skills_list):
     for skill in skills_list:
         if len(skill) <= 3:
             skill = " " + skill + " "
+        print "==============================="
+        print skill
         for course in coursera_courses_json:
             if skill in course["name"] or skill in course["category-ids"] or skill in course["courses"][0]["certificate_description"]:
                 if coursera_class_base_url + course["short_name"] not in related_courses_list.keys():
                    related_courses_list = dict(related_courses_list.items() + ({course["name"]:((coursera_class_base_url + course["short_name"]),course["photo"])}.items()))
+                   print course["name"]
                # break
             for category in course["categories"]:
                 if skill in category["name"]:
                     if coursera_class_base_url + course["short_name"] not in related_courses_list.keys():
                         related_courses_list = dict(related_courses_list.items() + ({course["name"]:((coursera_class_base_url + course["short_name"]),course["photo"])}.items()))
+                        print course["name"]
                     #break
     return related_courses_list
 
 #test script
-skills = ['politics', 'business', 'art']
-skills2= ['machine learning', 'algorithms', 'databases', 'git', 'C', 'economics', 'neuroscience']
-p = find_related_courses(skills)
-for thing in p:
-   print thing
-print len(p)
+#skills = ['politics', 'business', 'art']
+#skills2= ['machine learning', 'algorithms', 'databases', 'git', 'C', 'economics', #'neuroscience']
+#p = find_related_courses(skills)
+#for thing in p:
+#   print thing
+#print len(p)
