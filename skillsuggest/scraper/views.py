@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from scraper.skill_scraper import find_best_skills, get_url_list, get_personal_skills
+from scraper.skill_scraper import find_best_skills, get_url_list, get_personal_skills, find_related_courses
 import requests
 import json
 import urllib, urllib2
@@ -29,18 +29,21 @@ def get_token(request):
         data = {
             "grant_type" : "authorization_code",
             "code" : str(code),
-            "redirect_uri" : "http://localhost:8080/youarein",
+            "redirect_uri" : "http://localhost:8000/youarein",
             "client_id" : client_id,
             "client_secret" : client_secret
         }
         post_url = auth_url + "?grant_type={0}&code={1}&redirect_uri={2}&client_id={3}&client_secret={4}".format(data["grant_type"], data["code"], data["redirect_uri"], data["client_id"], data["client_secret"])
         r = requests.post(post_url)
-#print auth_url+urllib.urlencode(data)
+        print post_url
+        print auth_url + urllib.urlencode(data)
 #r = requests.post(auth_url, data=data)
 #r = urllib2.urlopen(auth_url, urllib.urlencode(data))
         if r.status_code != requests.codes.ok:
             print "problem occured getting auth token"
         r = json.loads(r.text)
+        print"here"
+        print r
         token = r.get("access_token", None)
         if token is None:
             return render(request, "auth_fail.html", {"error": "could not acquire token"})
@@ -56,7 +59,13 @@ def get_token(request):
         best_list = find_best_skills(url_list, own_list)
         best_list = best_list.items()
         best_list.sort(key=lambda(x):x[1],reverse=True)
-        return HttpResponse(str(best_list))
+        #best_list = best_list.keys()
+        final_list = []
+        for element in best_list:
+            final_list.append(element[0])
+        course_list = find_related_courses(final_list)
+        print course_list
+        return render(request, "results.html", {'course_list': course_list, 'skill_list': best_list})
     else:
         return render(request, "please_wait.html")
 

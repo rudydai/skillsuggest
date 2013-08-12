@@ -41,26 +41,26 @@ def find_best_skills(connections_url_list,personal_skill_set):
 #add the skill to the inner dictionary, or if already present, increase weight by 1
 
 def find_related_courses(skills_list):
-    related_courses_list = []
+    related_courses_list = {}
     for skill in skills_list:
         if len(skill) <= 3:
             skill = " " + skill + " "
         for course in coursera_courses_json:
             if skill in course["name"] or skill in course["category-ids"] or skill in course["courses"][0]["certificate_description"]:
-                if coursera_class_base_url + course["short_name"] not in related_courses_list:
-                   related_courses_list.append(coursera_class_base_url + course["short_name"])
+                if coursera_class_base_url + course["short_name"] not in related_courses_list.keys():
+                   related_courses_list = dict(related_courses_list.items() + ({course["name"]:((coursera_class_base_url + course["short_name"]),course["photo"])}.items()))
                # break
             for category in course["categories"]:
                 if skill in category["name"]:
-                    if coursera_class_base_url + course["short_name"] not in related_courses_list:
-                        related_courses_list.append(coursera_class_base_url + course["short_name"])
+                    if coursera_class_base_url + course["short_name"] not in related_courses_list.keys():
+                        related_courses_list = dict(related_courses_list.items() + ({course["name"]:((coursera_class_base_url + course["short_name"]),course["photo"])}.items()))
                     #break
     return related_courses_list
 
 #test script
-#skills = ['neuroscience']
-#skills2= ['machine learning', 'algorithms', 'databases', 'git', 'C', 'economics', #'neuroscience']
-#p = find_related_courses(skills)
-#for thing in p:
-#   print thing
-#print len(p)
+skills = ['politics', 'business', 'art']
+skills2= ['machine learning', 'algorithms', 'databases', 'git', 'C', 'economics', 'neuroscience']
+p = find_related_courses(skills)
+for thing in p:
+   print thing
+print len(p)
