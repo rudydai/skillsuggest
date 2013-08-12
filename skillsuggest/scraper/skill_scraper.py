@@ -22,7 +22,7 @@ def get_personal_skills(xml):
 
 def find_best_skills(connections_url_list,personal_skill_set):
     weighted_skills_dictionary = {}
-    for url in connections_url_list[:10]:
+    for url in connections_url_list:#[:10]:
         print "accessing url {0}".format(url)
         soup = BeautifulSoup(urllib.urlopen(url).read())
         skill_list = soup.find_all("li", class_="competency show-bean ")
@@ -47,20 +47,20 @@ def find_related_courses(skills_list):
             skill = " " + skill + " "
         for course in coursera_courses_json:
             if skill in course["name"] or skill in course["category-ids"] or skill in course["courses"][0]["certificate_description"]:
-                if course["courses"][0]["home_link"] not in related_courses_list:
+                if coursera_class_base_url + course["short_name"] not in related_courses_list:
                    related_courses_list.append(coursera_class_base_url + course["short_name"])
                # break
             for category in course["categories"]:
                 if skill in category["name"]:
-                    if course["courses"][0]["home_link"] not in related_courses_list:
+                    if coursera_class_base_url + course["short_name"] not in related_courses_list:
                         related_courses_list.append(coursera_class_base_url + course["short_name"])
                     #break
     return related_courses_list
 
 #test script
-skills = ['neuroscience']
-skills2= ['machine learning', 'algorithms', 'databases', 'git', 'C', 'economics', 'neuroscience']
-p = find_related_courses(skills)
-for thing in p:
-   print thing
-print len(p)
+#skills = ['neuroscience']
+#skills2= ['machine learning', 'algorithms', 'databases', 'git', 'C', 'economics', #'neuroscience']
+#p = find_related_courses(skills)
+#for thing in p:
+#   print thing
+#print len(p)
