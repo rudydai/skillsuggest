@@ -1,10 +1,7 @@
 <html>
-<head>
-<title> LinkedLearning </title>
 <h1>
     Help us help you
 </h1>
-</head>
 <body>
     to access your data, please <a href="https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=m70mm27vpve4&state=aaa&redirect_uri=http://localhost:8000/youarein">sign in</a>
 </body>

@@ -4,6 +4,7 @@ import urllib
 
 coursera_courses_json = json.loads(urllib.urlopen("https://www.coursera.org/maestro/api/topic/list?full=1").read())
 coursera_class_base_url = "https://www.coursera.org/course/"
+exclusion_list = ['Microsoft Office', 'Microsoft Word', 'PowerPoint', 'Microsoft Excel', 'Photoshop'] #skills we don't think are of interest to our users
 
 def get_url_list(xml):
     soup = BeautifulSoup(xml)
@@ -33,7 +34,7 @@ def find_best_skills(connections_url_list,personal_skill_set):
             for element in skill_list:
                 if element in weighted_skills_dictionary:
                     weighted_skills_dictionary[element] += weight
-                elif element not in personal_skill_set and element not in weighted_skills_dictionary:
+                elif element not in personal_skill_set and element not in weighted_skills_dictionary and element not in exclusion_list:
                     weighted_skills_dictionary[element] = weight
     return weighted_skills_dictionary
 #psuedocode: go through each connection and get their skills.
@@ -42,19 +43,23 @@ def find_best_skills(connections_url_list,personal_skill_set):
 
 def find_related_courses(skills_list):
     related_courses_list = []
+    seen_courses = []
     for skill in skills_list:
+        print "=================: \n " + skill 
         if len(skill) <= 3:
             skill = " " + skill + " "
         for course in coursera_courses_json:
             if skill in course["name"] or skill in course["category-ids"] or skill in course["courses"][0]["certificate_description"]:
-                if coursera_class_base_url + course["short_name"] not in related_courses_list:
-                   related_courses_list.append(coursera_class_base_url + course["short_name"])
-               # break
+                if course["name"] not in seen_courses:
+                   related_courses_list.extend([(course["name"],(coursera_class_base_url + course["short_name"]), course["large_icon"])])
+                   seen_courses.append(course["name"])
+                   print course["name"] 
             for category in course["categories"]:
                 if skill in category["name"]:
-                    if coursera_class_base_url + course["short_name"] not in related_courses_list:
-                        related_courses_list.append(coursera_class_base_url + course["short_name"])
-                    #break
+                    if course["name"] not in seen_courses:
+                        related_courses_list.extend([(course["name"],(coursera_class_base_url + course["short_name"]), course["large_icon"])])
+                        seen_courses.append(course["name"])
+                        print course["name"]                  
     return related_courses_list
 
 #test script
