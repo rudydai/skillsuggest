@@ -62,7 +62,13 @@ body {
   display: inline-block;
 }
 
+#creator-header {
+  font-size: 30px;
+  display: inline-block;
+}
 .creator {
+  padding: 5px;
+  text-align: center;
   display: inline-block;
 }
 .github {
