@@ -2,34 +2,37 @@
 
 <head>
 
+<!-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>->
+
 <style>
-text {
-  font: 10px sans-serif;
+
+body {   
+  background-color: #E0DDDD;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
 }
+.course {
+  background-color: #D0CCCC;
+  padding: 20px 20px 20px 30px;
+  width: 500px;
+  text-align: center;
+}
+
+.course:hover {
+  background-color: #E0DDDD;
+}
+
+a {
+  text-decoration: none;
+  color: #777777
+}
+
+a:hover {
+  color: #444444
+} 
+
 </style>
-
-<title>Your results!</title>
-</head>
-
-<body>
-Here are your top 10 skills to learn, as suggested by your social network: <br>
-
-<ul>
-{% for skill in skill_list %}
-    <li>{{ skill }}</li>
-{% endfor %}
-</ul>
-
-<ul>
-{% for course in course_list %}
-    <li>
-        <a href="{{ course.1 }}">{{ course.0 }}</a> 
-        <br> 
-        <img src="{{ course.2 }}"></li>
-{% endfor %}
-</ul>
-
-</body>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
@@ -48,7 +51,7 @@ var svg = d3.select("body").append("svg")
     .attr("height", diameter)
     .attr("class", "bubble");
 
-d3.json("flare.json", function(error, root) {
+d3.json("/static/flare.json/", function(error, root) {
   var node = svg.selectAll(".node")
       .data(bubble.nodes(classes(root))
       .filter(function(d) { return !d.children; }))
@@ -85,5 +88,27 @@ function classes(root) {
 d3.select(self.frameElement).style("height", diameter + "px");
 
 </script>
+
+<title>Your results!</title>
+</head>
+
+<body>
+
+<ul>
+{% for skill in skill_list %}
+    <li class="skill">{{ skill }}</li>
+{% endfor %}
+</ul>
+
+{% for course in course_list %}
+    <a class href="{{ course.1 }}">
+    <div class="course">
+        <div>{{ course.0 }}</div> <br>
+        <img src="{{ course.2 }}">
+    </div>
+    </a>	
+{% endfor %}
+
+</body>
 
 </html>

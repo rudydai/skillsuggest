@@ -57,11 +57,13 @@ def get_token(request):
         print "processing lists"
         best_list = find_best_skills(url_list, own_list)
         skills_json = json.dumps(dict(best_list))
-        #f = open(os.getcwd() + '/templates/flare.json', 'w')
-        #f.write(json.dumps(best_list))
-        #f.close()
+        
         best_list = best_list.items()
         best_list.sort(key=lambda(x):x[1],reverse=True)
+        print os.path.dirname(__file__) + '/static/flare.json'
+        f = open(os.path.dirname(__file__) + '/static/flare.json', 'w')
+        f.write(json.dumps(flarify(best_list)))
+        f.close()
         final_list = []
         for element in best_list:
             final_list.append(element[0])
@@ -70,15 +72,18 @@ def get_token(request):
         course_list = find_related_courses(final_list)
         print course_list
         
-        return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list}) 
+        return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list[:50]}) 
     else:
         return render(request, "please_wait.html")
 
-def return_skills_json(request):
-    print "got here"
-    print(skills_json)
-    return HttpResponse(skills_json)
-
-
+def flarify(tuples):
+    children = []
+    print "++++++++++++++++++++flarify ++++++++++++++++++++++++++++++++" 
+    print tuples
+    for i in range(50):
+        print tuples[i]
+        children.append({"name": tuples[i][0], "size": tuples[i][1]})
+    flare_dict = {"name": "flare", "children": children}
+    return flare_dict
 
         
