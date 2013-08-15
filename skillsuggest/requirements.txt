@@ -28,6 +28,8 @@ dirspec==3.0.0
 distribute==0.6.24dev-r0
 docutils==0.8.1
 duplicity==0.6.18
+eventlet==0.13.0
+greenlet==0.4.1
 gunicorn==0.17.2
 httplib2==0.7.2
 jockey==0.9.7
@@ -77,3 +79,8 @@ wsgiref==0.1.2
 xdiagnose==2.5.2ubuntu0.1
 xkit==0.0.0
 zope.interface==3.6.1
+dj-database-url==0.2.1
+dj-static==0.0.5
+gunicorn==17.5
+psycopg2==2.5.1
+static==0.4
