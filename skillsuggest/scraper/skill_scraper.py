@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import json
-import urllib
+import eventlet
+from eventlet.green import urllib
 
 coursera_courses_json = json.loads(urllib.urlopen("https://www.coursera.org/maestro/api/topic/list?full=1").read())
 coursera_class_base_url = "https://www.coursera.org/course/"
@@ -21,11 +22,15 @@ def get_personal_skills(xml):
     names = [skill.text for skill in skill_list]
     return names
 
+def fetch_html(url):
+    print "accessing url {0}".format(url)
+    return urllib.urlopen(url).read()
+
 def find_best_skills(connections_url_list,personal_skill_set):
+    pool = eventlet.GreenPool()
     weighted_skills_dictionary = {}
-    for url in connections_url_list:
-        print "accessing url {0}".format(url)
-        soup = BeautifulSoup(urllib.urlopen(url).read())
+    for html_body in pool.imap(fetch_html, connections_url_list):
+        soup = BeautifulSoup(html_body)
         skill_list = soup.find_all("li", class_="competency show-bean ")
         for i in range (0, len(skill_list)):
             skill_list[i] = skill_list[i].text.strip()   # getting a cleaned up list of connection's skills
