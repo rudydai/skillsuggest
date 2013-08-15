@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup
 import json
-import urllib
+import eventlet
+from eventlet.green import urllib
 
 coursera_courses_json = json.loads(urllib.urlopen("https://www.coursera.org/maestro/api/topic/list?full=1").read())
 coursera_class_base_url = "https://www.coursera.org/course/"
-exclusion_list = ['Microsoft Office', 'Microsoft Word', 'PowerPoint', 'Microsoft Excel', 'Photoshop', 'Word', 'Research', 'Teamwork', 'Customer Service', 'Time Management', 'Excel', 'Office', 'MIPS', 'Facebook', 'English', 'Editing', 'Outlook', 'Google Docs'] #skills we don't think are of interest to our users
+exclusion_list = ['Microsoft Office', 'Microsoft Word', 'PowerPoint', 'Microsoft Excel', 'Photoshop', 'Word', 'Research', 'Teamwork', 'Customer Service', 'Time Management', 'Excel', 'Office', 'MIPS', 'Facebook', 'English', 'Editing', 'Outlook', 'Google Docs', 'Windows'] #skills we don't think are of interest to our users
 
 def get_url_list(xml):
     soup = BeautifulSoup(xml)
@@ -21,11 +22,16 @@ def get_personal_skills(xml):
     names = [skill.text for skill in skill_list]
     return names
 
+def fetch_html(url):
+    print "accessing url {0}".format(url)
+    return urllib.urlopen(url).read()
+
 def find_best_skills(connections_url_list,personal_skill_set):
+    connections_url_list = connections_url_list[:10] # for dev purposes
+    pool = eventlet.GreenPool()
     weighted_skills_dictionary = {}
-    for url in connections_url_list:
-        print "accessing url {0}".format(url)
-        soup = BeautifulSoup(urllib.urlopen(url).read())
+    for html_body in pool.imap(fetch_html, connections_url_list):
+        soup = BeautifulSoup(html_body)
         skill_list = soup.find_all("li", class_="competency show-bean ")
         for i in range (0, len(skill_list)):
             skill_list[i] = skill_list[i].text.strip()   # getting a cleaned up list of connection's skills
