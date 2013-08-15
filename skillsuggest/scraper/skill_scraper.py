@@ -27,7 +27,7 @@ def fetch_html(url):
     return urllib.urlopen(url).read()
 
 def find_best_skills(connections_url_list,personal_skill_set):
-    connections_url_list = connections_url_list[:50] # for dev purposes
+    connections_url_list = connections_url_list[:100] # for dev purposes
     pool = eventlet.GreenPool()
     weighted_skills_dictionary = {}
     for html_body in pool.imap(fetch_html, connections_url_list):

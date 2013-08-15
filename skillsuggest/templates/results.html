@@ -53,7 +53,6 @@ var svg = d3.select("body").append("svg")
     .attr("class", "bubble");
 
 //d3.json("/static/flare.json/", function(error, root) {
-  console.log( {{ skills_json }} );
   var root = {{ skills_json }};
   var node = svg.selectAll(".node")
       .data(bubble.nodes(classes(root))
@@ -97,6 +96,8 @@ d3.select(self.frameElement).style("height", diameter + "px");
 </head>
 
 <body>
+
+{{ skills_json }}
 
 <ul>
 {% for skill in skill_list %}

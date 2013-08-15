@@ -57,14 +57,10 @@ def get_token(request):
 #print own_list
         print "processing lists"
         best_list = find_best_skills(url_list, own_list)
-        skills_json = json.dumps(dict(best_list))
         
         best_list = best_list.items()
         best_list.sort(key=lambda(x):x[1],reverse=True)
-        print os.path.dirname(__file__) + '/static/flare.json'
-        #f = open(os.path.dirname(__file__) + '/static/flare.json', 'w')
-        #f.write(json.dumps(flarify(best_list)))
-        #f.close()
+        skills_json = json.dumps(flarify(best_list))
         final_list = []
         for element in best_list:
             final_list.append(element[0])
