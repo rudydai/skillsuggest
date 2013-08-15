@@ -26,14 +26,20 @@ def fetch_html(url):
     print "accessing url {0}".format(url)
     return urllib.urlopen(url).read()
 
+def scrub_html(text):    
+    soup = BeautifulSoup(text)
+    skill_list = soup.find_all("li", class_="competency show-bean ")
+    for i in range (0, len(skill_list)):
+        skill_list[i] = skill_list[i].text.strip()   # getting a cleaned up list of connection's skills
+    return skill_list
+
+def fetch_and_scrub(url):
+    return scrub_html(fetch_html(url))
+
 def find_best_skills(connections_url_list,personal_skill_set):
     pool = eventlet.GreenPool()
     weighted_skills_dictionary = {}
-    for html_body in pool.imap(fetch_html, connections_url_list):
-        soup = BeautifulSoup(html_body)
-        skill_list = soup.find_all("li", class_="competency show-bean ")
-        for i in range (0, len(skill_list)):
-            skill_list[i] = skill_list[i].text.strip()   # getting a cleaned up list of connection's skills
+    for skill_list in pool.imap(fetch_and_scrub, connections_url_list):
         weight = len(set(skill_list) & set(personal_skill_set)) #number of skills in common
         if weight > 0:
             for element in skill_list:
