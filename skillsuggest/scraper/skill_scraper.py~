@@ -4,7 +4,7 @@ import urllib
 
 coursera_courses_json = json.loads(urllib.urlopen("https://www.coursera.org/maestro/api/topic/list?full=1").read())
 coursera_class_base_url = "https://www.coursera.org/course/"
-exclusion_list = ['Microsoft Office', 'Microsoft Word', 'PowerPoint', 'Microsoft Excel', 'Photoshop', 'Word', 'Research', 'Teamwork', 'Customer Service', 'Time Management', 'Excel', 'Office', 'MIPS', 'Facebook', 'English', 'Editing', 'Outlook', 'Google Docs', 'Windows'] #skills we don't think are of interest to our users
+exclusion_list = ['Microsoft Office', 'Microsoft Word', 'PowerPoint', 'Microsoft Excel', 'Photoshop', 'Word', 'Research', 'Teamwork', 'Customer Service', 'Time Management', 'Excel', 'Office', 'MIPS', 'Facebook', 'English', 'Editing', 'Outlook', 'Google Docs'] #skills we don't think are of interest to our users
 
 def get_url_list(xml):
     soup = BeautifulSoup(xml)
