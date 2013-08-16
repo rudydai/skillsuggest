@@ -29,7 +29,8 @@ body {
 }
 
 #signIn {
-  padding: 10px 0 0 20px;
+  padding: 60px 0 0 20px;
+  font-size: 18px;
 }
 
 #about {

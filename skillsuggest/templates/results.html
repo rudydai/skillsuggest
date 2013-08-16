@@ -52,7 +52,8 @@ var svg = d3.select("body").append("svg")
     .attr("height", diameter)
     .attr("class", "bubble");
 
-d3.json("/static/flare.json/", function(error, root) {
+//d3.json("/static/flare.json/", function(error, root) {
+  var root = {{ skills_json }};
   var node = svg.selectAll(".node")
       .data(bubble.nodes(classes(root))
       .filter(function(d) { return !d.children; }))
@@ -71,7 +72,8 @@ d3.json("/static/flare.json/", function(error, root) {
       .attr("dy", ".3em")
       .style("text-anchor", "middle")
       .text(function(d) { return d.className.substring(0, d.r / 3); });
-});
+//});
+
 
 // Returns a flattened hierarchy containing all leaf nodes under the root.
 function classes(root) {
@@ -94,6 +96,8 @@ d3.select(self.frameElement).style("height", diameter + "px");
 </head>
 
 <body>
+
+{{ skills_json }}
 
 <ul>
 {% for skill in skill_list %}

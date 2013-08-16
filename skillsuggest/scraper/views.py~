@@ -5,6 +5,7 @@ import requests
 import json
 import urllib, urllib2
 import os
+from django.utils.safestring import SafeString
 # Create your views here.
 
 client_id = "m70mm27vpve4"
@@ -56,14 +57,14 @@ def get_token(request):
 #print own_list
         print "processing lists"
         best_list = find_best_skills(url_list, own_list)
-        skills_json = json.dumps(dict(best_list))
         
         best_list = best_list.items()
         best_list.sort(key=lambda(x):x[1],reverse=True)
-        print os.path.dirname(__file__) + '/static/flare.json'
-        f = open(os.path.dirname(__file__) + '/static/flare.json', 'w')
-        f.write(json.dumps(flarify(best_list)))
-        f.close()
+        skills_json = json.dumps(flarify(best_list))
+        #print os.path.dirname(__file__) + '/static/flare.json'
+        #f = open(os.path.dirname(__file__) + '/static/flare.json', 'w')
+        #f.write(json.dumps(flarify(best_list)))
+        #f.close()
         final_list = []
         for element in best_list:
             final_list.append(element[0])
@@ -72,14 +73,13 @@ def get_token(request):
         course_list = find_related_courses(final_list)
         print course_list
         
-        return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list[:50]}) 
+        return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list[:50], 'skills_json': SafeString(skills_json)}) 
     else:
         return render(request, "please_wait.html")
 
 def flarify(tuples):
     children = []
     print "++++++++++++++++++++flarify ++++++++++++++++++++++++++++++++" 
-    print tuples
     for i in range(50):
         print tuples[i]
         children.append({"name": tuples[i][0], "size": tuples[i][1]})

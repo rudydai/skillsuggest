@@ -1,42 +1,52 @@
 
-#header {
-  font-size: 80px;
-  font-weight: normal;
+#logo {
   color: #14A697;
-  width: 100%;
-  opacity: .7;
-  height: 17%;
-  padding: 10px 0 10px 20px;
-  background-color: black;
+  font: normal 90px "Ostrich Sans", sans-serif;
 }
 
-#header .description {
-  font-size: large;
-  font-style: italic;
-  color: white;
+#logo-learning {
+  color: black;
+  font: normal 90px italic "Ostrich Sans Inline";
 }
 
-body {
-  margin: 0;
+#header {
+  float: right;
+  text-align: right;
+  padding: 15px 30px 0 30px;
 }
-#welcomePage {
-  background-image: url("images/cloth.png");
-  background-repeat: repeat;
-  font: normal bold 15px "NovecentowideUltraLightBold", sans-serif;
-  min-height: 100%;
-  text-align: center;
 
+#description {
+  width: 40%;
+  float: right;
+  font: normal 40px "Ostrich Sans";
+  color: black;
 }
 
 #signIn {
-  padding: 10px 0 0 20px;
+  padding-top: 80px;
+  font: normal 30px normal "Ostrich Sans Inline";
+}
+
+.link {
+  font: normal 30px "Ostrich Sans";
+}
+body {
+  margin: 0;
+}
+
+#welcomePage {
+  background-image: url("images/cloth.png");
+  background-repeat: repeat;
+  min-height: 100%;
 }
 
 #about {
-  text-align: left;
-  bottom: 0;
-  right: 0;
-  position: absolute;
+  width: 35%;
+  float: right;
+  font-family: "NovecentowideUltraLightBold";
+  color: white;
+  background: rgba(00, 00, 00, .5);
+  min-height: 100%;
 }
 
 .circle { 
@@ -63,14 +73,21 @@ body {
 }
 
 #creator-header {
-  font-size: 30px;
-  display: inline-block;
-}
-.creator {
-  padding: 5px;
+  padding: 10px 0 0 0;
   text-align: center;
-  display: inline-block;
+  height: 30px;
+  border-bottom: 2px dashed;
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
 }
+
+.creator {
+  padding: 0 10px 20px 10px;
+  text-align: center;
+  display: block;
+}
+
 .github {
   background-image: url("images/github-icon.png");
 }
