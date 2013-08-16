@@ -1,31 +1,35 @@
 
 #logo {
   color: #14A697;
-  font: normal 100px "Ostrich Sans", sans-serif;
+  font: normal 90px "Ostrich Sans", sans-serif;
 }
 
 #logo-learning {
   color: black;
-  font-weight: bold;
-  font-size: 90px;
+  font: normal 90px italic "Ostrich Sans Inline";
 }
 
 #header {
-  min-width: 45%;
   float: right;
   text-align: right;
   padding: 15px 30px 0 30px;
 }
 
-#header .description {
-  font: normal 30px "Ostrich Sans";
+#description {
+  width: 40%;
+  float: right;
+  font: normal 40px "Ostrich Sans";
   color: black;
 }
 
 #signIn {
-  font: normal 30px "Ostrich Sans";
+  padding-top: 80px;
+  font: normal 30px normal "Ostrich Sans Inline";
 }
 
+.link {
+  font: normal 30px "Ostrich Sans";
+}
 body {
   margin: 0;
 }
@@ -37,7 +41,7 @@ body {
 }
 
 #about {
-  min-width: 30%;
+  width: 35%;
   float: right;
   font-family: "NovecentowideUltraLightBold";
   color: white;
