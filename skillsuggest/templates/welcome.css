@@ -49,6 +49,10 @@ body {
   min-height: 100%;
 }
 
+#creatorContainer {
+  width: auto;
+  float: left;
+}
 .circle { 
    width: 120px;
    height: 120px;
@@ -61,8 +65,6 @@ body {
 
 .social-icons {
   display: block;
-  text-align: center;
-
 }
 
 .icon {
@@ -86,6 +88,21 @@ body {
   padding: 0 10px 20px 10px;
   text-align: center;
   display: block;
+}
+
+  padding: 20px 10px 0px 20px;
+  display: block;
+  text-align: center;
+}
+
+#divider {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  height: auto;
+  width: 100%;
 }
 
 .github {

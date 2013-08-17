@@ -1,4 +1,5 @@
 
+<<<<<<< Updated upstream
 #logo {
   color: #14A697;
   font: normal 90px "Ostrich Sans", sans-serif;
@@ -47,6 +48,47 @@ body {
   color: white;
   background: rgba(00, 00, 00, .5);
   min-height: 100%;
+=======
+#header {
+  font-size: 80px;
+  font-weight: normal;
+  color: #14A697;
+  width: 100%;
+  opacity: .7;
+  height: 17%;
+  padding: 10px 0 10px 20px;
+  background-color: black;
+}
+
+#header .description {
+  font-size: large;
+  font-style: italic;
+  color: white;
+}
+
+body {
+  margin: 0;
+}
+#welcomePage {
+  background-image: url("images/cloth.png");
+  background-repeat: repeat;
+  font: normal bold 15px "NovecentowideUltraLightBold", sans-serif;
+  min-height: 100%;
+  text-align: center;
+
+}
+
+#signIn {
+  padding: 60px 0 0 20px;
+  font-size: 18px;
+}
+
+#about {
+  text-align: left;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+>>>>>>> Stashed changes
 }
 
 .circle { 
@@ -73,6 +115,7 @@ body {
 }
 
 #creator-header {
+<<<<<<< Updated upstream
   padding: 10px 0 0 0;
   text-align: center;
   height: 30px;
@@ -88,6 +131,16 @@ body {
   display: block;
 }
 
+=======
+  font-size: 30px;
+  display: inline-block;
+}
+.creator {
+  padding: 5px;
+  text-align: center;
+  display: inline-block;
+}
+>>>>>>> Stashed changes
 .github {
   background-image: url("images/github-icon.png");
 }

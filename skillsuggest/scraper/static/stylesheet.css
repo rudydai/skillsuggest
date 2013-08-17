@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 @font-face {
     font-family: 'League Gothic';
     src: url('leaguegothic-regular-webfont.eot');
@@ -9,6 +10,31 @@
     font-style: normal;
 
 }
+=======
+/*
+ * Web Fonts from fontspring.com
+ *
+ * All OpenType features and all extended glyphs have been removed.
+ * Fully installable fonts can be purchased at http://www.fontspring.com
+ *
+ * The fonts included in this stylesheet are subject to the End User License you purchased
+ * from Fontspring. The fonts are protected under domestic and international trademark and 
+ * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
+ * distributing this font software.
+ *
+ * (c) 2010-2013 Fontspring
+ *
+ *
+ *
+ *
+ * The fonts included are copyrighted by the vendor listed below.
+ *
+ * Vendor:      Synthview Type Design
+ * License URL: http://www.fontspring.com/fflicense/synthview
+ *
+ *
+ */
+>>>>>>> Stashed changes
 
 @font-face {
     font-family: 'NovecentowideUltraLightBold';
@@ -22,6 +48,7 @@
 
 }
 
+<<<<<<< Updated upstream
 /* Ostrich Sans */
 
 @font-face {
@@ -89,3 +116,5 @@
   font-weight: normal;
   font-style: italic;
 }
+=======
+>>>>>>> Stashed changes
