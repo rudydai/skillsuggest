@@ -41,7 +41,8 @@ body {
 }
 
 #about {
-  width: 35%;
+  /* jQuery will toggle this */
+  width: 0%;
   float: right;
   font-family: "NovecentowideUltraLightBold";
   color: white;
@@ -49,6 +50,10 @@ body {
   min-height: 100%;
 }
 
+#creatorContainer {
+  width: auto;
+  float: left;
+}
 .circle { 
    width: 120px;
    height: 120px;
@@ -61,8 +66,6 @@ body {
 
 .social-icons {
   display: block;
-  text-align: center;
-
 }
 
 .icon {
@@ -72,20 +75,23 @@ body {
   display: inline-block;
 }
 
-#creator-header {
-  padding: 10px 0 0 0;
-  text-align: center;
-  height: 30px;
-  border-bottom: 2px dashed;
-  font-weight: bold;
-  font-size: 16px;
+.creator {
+  width: inherit;
+  padding: 20px 10px 0 20px;
   display: block;
+  text-align: center;
 }
 
-.creator {
-  padding: 0 10px 20px 10px;
-  text-align: center;
-  display: block;
+#showOrHide{
+  background-color: white;
+  color: black;
+  font: normal 30px "Ostrich Sans";
+  float: right;
+  margin-top: 100px;
+}
+
+.hidden {
+  display: none;
 }
 
 .github {
@@ -104,5 +110,9 @@ body {
   background-image: url("images/rudy.jpg");
 }
 #david {
-  background-image: url("images/david-img.jpg");
+  background-image: url("images/david.jpg");
+}
+
+#michelle {
+  background-image: url("images/michelle.png");
 }
