@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from scraper.skill_scraper import find_best_skills, get_url_list, get_personal_skills, find_related_courses
 import requests
 import json
-import urllib, urllib2
-import os
 from django.utils.safestring import SafeString
 # Create your views here.
 
@@ -38,9 +36,7 @@ def get_token(request):
         }
         post_url = auth_url + "?grant_type={0}&code={1}&redirect_uri={2}&client_id={3}&client_secret={4}".format(data["grant_type"], data["code"], data["redirect_uri"], data["client_id"], data["client_secret"])
         r = requests.post(post_url)
-#print auth_url+urllib.urlencode(data)
 #r = requests.post(auth_url, data=data)
-#r = urllib2.urlopen(auth_url, urllib.urlencode(data))
         if r.status_code != requests.codes.ok:
             print "problem occured getting auth token"
         r = json.loads(r.text)
