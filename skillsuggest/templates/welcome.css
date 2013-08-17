@@ -83,8 +83,9 @@ body {
 }
 
 #showOrHide{
-  background-color: white;
-  color: black;
+  padding: 5px 5px 0px 5px;
+  background-color: black;
+  color: white;
   font: normal 30px "Ostrich Sans";
   float: right;
   margin-top: 100px;
