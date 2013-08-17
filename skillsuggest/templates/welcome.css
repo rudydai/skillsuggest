@@ -41,7 +41,8 @@ body {
 }
 
 #about {
-  width: 35%;
+  /* jQuery will toggle this */
+  width: 0%;
   float: right;
   font-family: "NovecentowideUltraLightBold";
   color: white;
@@ -74,35 +75,23 @@ body {
   display: inline-block;
 }
 
-#creator-header {
-  padding: 10px 0 0 0;
-  text-align: center;
-  height: 30px;
-  border-bottom: 2px dashed;
-  font-weight: bold;
-  font-size: 16px;
-  display: block;
-}
-
 .creator {
-  padding: 0 10px 20px 10px;
-  text-align: center;
-  display: block;
-}
-
-  padding: 20px 10px 0px 20px;
+  width: inherit;
+  padding: 20px 10px 0 20px;
   display: block;
   text-align: center;
 }
 
-#divider {
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-  height: auto;
-  width: 100%;
+#showOrHide{
+  background-color: white;
+  color: black;
+  font: normal 30px "Ostrich Sans";
+  float: right;
+  margin-top: 100px;
+}
+
+.hidden {
+  display: none;
 }
 
 .github {
@@ -125,5 +114,5 @@ body {
 }
 
 #michelle {
-  background-image: url("images/michelle.jpg");
+  background-image: url("images/michelle.png");
 }

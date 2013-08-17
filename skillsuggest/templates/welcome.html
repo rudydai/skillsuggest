@@ -40,21 +40,25 @@
       </div>
     </div>
   </div>
-    <div id="header">
-      <span id="logo">LINKED<span id="logo-learning">LEARNING</span></span><br>
-      <div id="description">
-        learning goals formed through your professional network
+
+
+  <div id="header">
+    <span id="logo">LINKED<span id="logo-learning">LEARNING</span></span><br>
+    <div id="description">
+      learning goals formed through your professional network
 
       <div id="signIn">
       to access your data, please <a href="https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=m70mm27vpve4&state=aaa&redirect_uri=http://localhost:8000/youarein" class="link">sign in</a>
       </div>
 
+      <div id="showOrHide">
+         <span id="hideCreators" class="hidden" onclick="$('#about').animate({ width: '0%'}); $(this).toggleClass('hidden'); $(this).siblings().toggleClass('hidden');"> hide creators </span>  
+
+         <span id="showCreators" onclick="$('#about').animate({ width: '35%'}); $(this).toggleClass('hidden'); $(this).siblings().toggleClass('hidden');"> show creators </span>
       </div>
     </div>
+
+  </div>
+
 </body>
 </html>
-
-<script>
-  $('#about').onclick
-
-</script>
