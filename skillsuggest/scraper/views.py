@@ -53,7 +53,7 @@ def get_token(request):
 #print own_list
 #print "processing lists"
         best_list = find_best_skills(url_list, own_list)
-        
+#print best_list
         best_list = best_list.items()
         best_list.sort(key=lambda(x):x[1],reverse=True)
         skills_json = json.dumps(flarify(best_list))
