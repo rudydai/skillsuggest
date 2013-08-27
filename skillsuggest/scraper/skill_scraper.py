@@ -37,7 +37,7 @@ def fetch_and_scrub(url):
     return scrub_html(fetch_html(url))
 
 def find_best_skills(connections_url_list,personal_skill_set):
-    connections_url_list = connections_url_list[:10] # for dev purposes
+    connections_url_list = connections_url_list[:100] # for dev purposes
     pool = eventlet.GreenPool()
     weighted_skills_dictionary = {}
     for skill_list in pool.imap(fetch_and_scrub, connections_url_list):

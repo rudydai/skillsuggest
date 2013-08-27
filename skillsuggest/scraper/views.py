@@ -53,6 +53,8 @@ def get_token(request):
 #print own_list
 #print "processing lists"
         best_list = find_best_skills(url_list, own_list)
+        if len(best_list) == 0:
+            return HttpResponse("linkedin caught us scrubbing, try again later")
 #print best_list
         best_list = best_list.items()
         best_list.sort(key=lambda(x):x[1],reverse=True)
