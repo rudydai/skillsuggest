@@ -5,6 +5,7 @@ MarkupSafe==0.15
 Werkzeug==0.8.3
 beautifulsoup4==4.2.1
 eventlet==0.13.0
+gevent==0.13.8
 greenlet==0.4.1
 httplib2==0.7.2
 oauth==1.0.1
