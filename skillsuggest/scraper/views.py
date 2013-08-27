@@ -67,7 +67,7 @@ def get_token(request):
         course_list = find_related_courses(final_list)
 #print course_list
         
-        return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list[:50], 'skills_json': SafeString(skills_json)}) 
+        return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list[:75], 'skills_json': SafeString(skills_json)}) 
     else:
         return render(request, "please_wait.html")
 
