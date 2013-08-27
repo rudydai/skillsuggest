@@ -30,7 +30,7 @@ def get_token(request):
         data = {
             "grant_type" : "authorization_code",
             "code" : str(code),
-            "redirect_uri" : "http://localhost:8000/youarein",
+            "redirect_uri" : "http://linkedlearning.herokuapp.com/youarein",
             "client_id" : client_id,
             "client_secret" : client_secret
         }
