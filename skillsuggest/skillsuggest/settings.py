@@ -1,4 +1,4 @@
-# Django settings for skillsuggest project.
+#Django settings for skillsuggest project.
 import os
 PROJECT_DIR=os.path.dirname(os.path.dirname(__file__))
 

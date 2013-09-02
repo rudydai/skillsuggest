@@ -1,8 +1,19 @@
 <html>
-<h1>
-    Authorization failed
-</h1>
+<link rel="stylesheet" href="auth_fail.css" type="text/css" charset="utf-8" />
+
+<link rel="stylesheet" href="/static/stylesheets/stylesheet.css" type="text/css" charset="utf-8" />
+<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
 <body>
-    There was a problem with {{ error }}
+
+	<div id="auth-container">
+		<div id="auth-failed-header">
+			Authorization failed
+		</div>
+		
+		<div id="err-message">
+			D'oh! There was a problem with {{ error }}. Try again!
+		</div>
+		
+	</div>
 </body>
 </html>

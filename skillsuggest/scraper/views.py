@@ -43,15 +43,15 @@ def get_token(request):
         token = r.get("access_token", None)
         if token is None:
             return render(request, "auth_fail.html", {"error": "could not acquire token"})
-        print "requesting connections data"
+#print "requesting connections data"
         basic_data = requests.get(profile_api_endpoint+"?oauth2_access_token={0}".format(token))
         url_list = get_url_list(basic_data.text)
 #print url_list
-        print "requesting skills data"
+#print "requesting skills data"
         own_data = requests.get(own_skills_endpoint+"?oauth2_access_token={0}".format(token))
         own_list = get_personal_skills(own_data.text)
 #print own_list
-        print "processing lists"
+#print "processing lists"
         best_list = find_best_skills(url_list, own_list)
         
         best_list = best_list.items()
@@ -60,10 +60,10 @@ def get_token(request):
         final_list = []
         for element in best_list:
             final_list.append(element[0])
-        print best_list
-        print final_list
+#print best_list
+#print final_list
         course_list = find_related_courses(final_list)
-        print course_list
+#print course_list
         
         return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list[:50], 'skills_json': SafeString(skills_json)}) 
     else:
@@ -71,9 +71,9 @@ def get_token(request):
 
 def flarify(tuples):
     children = []
-    print "++++++++++++++++++++flarify ++++++++++++++++++++++++++++++++" 
+#print "++++++++++++++++++++flarify ++++++++++++++++++++++++++++++++" 
     for i in range(50):
-        print tuples[i]
+#print tuples[i]
         children.append({"name": tuples[i][0], "size": tuples[i][1]})
     flare_dict = {"name": "flare", "children": children}
     return flare_dict

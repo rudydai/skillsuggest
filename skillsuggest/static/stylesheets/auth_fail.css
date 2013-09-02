@@ -1,0 +1,24 @@
+html {
+	background: url('../images/geometry.png');
+}
+#uh-oh {
+	float: left;
+	border-radius: 8px;
+}
+#auth-failed-header {
+	display: inline-block;
+	font-family: 'Cookie';
+	font-size: 100px;
+}
+
+#err-message {
+	left: 25%;
+	font-family: 'NovecentowideUltraLightBold';
+}
+
+#auth-container {
+	padding: 10px;
+	top: 25%;
+	width: 100%;
+	position: relative;
+}

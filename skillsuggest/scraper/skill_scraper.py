@@ -57,7 +57,7 @@ def find_related_courses(skills_list):
     related_courses_list = []
     seen_courses = []
     for skill in skills_list:
-        print "=================: \n " + skill 
+#print "=================: \n " + skill 
         if len(skill) <= 3:
             skill = " " + skill + " "
         for course in coursera_courses_json:
@@ -65,13 +65,13 @@ def find_related_courses(skills_list):
                 if course["name"] not in seen_courses and course['language'] == 'en':
                    related_courses_list.extend([(course["name"],(coursera_class_base_url + course["short_name"]), course["large_icon"])])
                    seen_courses.append(course["name"])
-                   print course["name"] 
+#print course["name"] 
             for category in course["categories"]:
                 if skill in category["name"]:
                     if course["name"] not in seen_courses and course['language'] == 'en':
                         related_courses_list.extend([(course["name"],(coursera_class_base_url + course["short_name"]), course["large_icon"])])
                         seen_courses.append(course["name"])
-                        print course["name"]                  
+#print course["name"]                  
     return related_courses_list
 
 #test script
