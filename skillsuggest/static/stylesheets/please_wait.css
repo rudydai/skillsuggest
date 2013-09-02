@@ -1,0 +1,32 @@
+
+#please-wait {
+	font: Arial;
+	background-image: url("../images/wild_flowers.png");
+}
+
+body {
+	margin: 0 0 0 0;
+	height: 50%;
+	top: 25%;
+	width: 100%;
+	position: absolute;
+	background: black;
+	color: white;
+	opacity: .8;
+}
+
+.container {
+	font-family: 'Mission Gothic';
+	position: relative;
+	top: 25%;
+	padding: 10px;
+}
+
+.working-header {
+	font-size: 40px;
+	font-family: 'League Gothic';
+}
+
+.working-message {
+	font-family: 'NovecentowideUltraLightBold';
+}

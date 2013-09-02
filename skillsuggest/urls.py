@@ -12,10 +12,11 @@ urlpatterns = patterns('',
     # url(r'^skillsuggest/', include('skillsuggest.foo.urls')),
     
       url(r'^$', 'scraper.views.auth', name='login'),
-      url(r'^youarein/$', 'scraper.views.get_token'),
-      url(r'^youarein/flare.json/', 'scraper.views.return_skills_json'),
+      url(r'^loading/$', 'scraper.views.get_token'),
+      url(r'^results/$', 'scraper.views.display_results'),
+      url(r'^results/flare.json/$', 'scraper.views.return_skills_json'),
 #url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-#       {'document_root': settings.STATIC_ROOT})
+#{'document_root': settings.STATIC_ROOT}),
     #url(r'^youarein/\?code=(.{0,})&state=(.{0,})', 'scraper.views.get_token'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

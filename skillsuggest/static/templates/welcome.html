@@ -43,12 +43,12 @@
 
 
   <div id="header">
-    <span id="logo">LINKED<span id="logo-learning">LEARNING</span></span><br>
+    <span id="logo">LINKED</span><span id="logo-learning">LEARNING</span><br>
     <div id="description">
       learning goals formed through your professional network
 
       <div id="signIn">
-      to access your data, please <a href="https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=m70mm27vpve4&state=aaa&redirect_uri=http://linkedlearning.herokuapp.com/youarein" class="link">sign in</a>
+      to access your data, please <a href="https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=m70mm27vpve4&state=aaa&redirect_uri=http://{{ request.META.HTTP_HOST }}/loading" class="link">sign in</a>
       </div>
 
       <div id="showOrHide">
@@ -59,6 +59,5 @@
     </div>
 
   </div>
-
 </body>
 </html>

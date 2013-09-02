@@ -1,12 +1,13 @@
 
 #logo {
   color: #14A697;
-  font: normal 90px "Ostrich Sans", sans-serif;
+  font: normal 85px "Ostrich Sans", sans-serif;
 }
 
 #logo-learning {
   color: black;
-  font: normal 90px italic "Ostrich Sans Inline";
+  font-weight: bold;
+  font: normal 85px "Ostrich Sans Inline";
 }
 
 #header {
@@ -24,13 +25,14 @@
 
 #signIn {
   padding-top: 80px;
-  font: normal 30px normal "Ostrich Sans Inline";
+  font: normal 20px normal "Ostrich Sans Inline";
 }
 
 .link {
-  font: normal 30px "Ostrich Sans";
+  font: normal 20px italic "Ostrich Sans";
 }
 body {
+  height: 100%;
   margin: 0;
 }
 
