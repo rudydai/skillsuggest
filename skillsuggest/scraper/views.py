@@ -30,14 +30,15 @@ def get_token(request):
         data = {
             "grant_type" : "authorization_code",
             "code" : str(code),
-            "redirect_uri" : "http://localhost:8000/youarein",
+            "redirect_uri" : "http://"+request.META['HTTP_HOST']+"/loading",
             "client_id" : client_id,
             "client_secret" : client_secret
         }
         post_url = auth_url + "?grant_type={0}&code={1}&redirect_uri={2}&client_id={3}&client_secret={4}".format(data["grant_type"], data["code"], data["redirect_uri"], data["client_id"], data["client_secret"])
         r = requests.post(post_url)
-#r = requests.post(auth_url, data=data)
         if r.status_code != requests.codes.ok:
+            print r
+            print r.text
             print "problem occured getting auth token"
         r = json.loads(r.text)
         token = r.get("access_token", None)
@@ -53,7 +54,6 @@ def get_token(request):
 #print own_list
 #print "processing lists"
         best_list = find_best_skills(url_list, own_list)
-        
         best_list = best_list.items()
         best_list.sort(key=lambda(x):x[1],reverse=True)
         skills_json = json.dumps(flarify(best_list))
@@ -64,15 +64,26 @@ def get_token(request):
 #print final_list
         course_list = find_related_courses(final_list)
 #print course_list
-        
-        return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list[:50], 'skills_json': SafeString(skills_json)}) 
-    else:
+        request.session["skill_list"] = final_list
+        request.session["course_list"] = course_list[:50]
+        request.session["skills_json"] = SafeString(skills_json)
         return render(request, "please_wait.html")
+
+def display_results(request):
+    final_list = request.session.get("skill_list")
+    course_list = request.session.get("course_list")
+    skills_json = request.session.get("skills_json")
+    if final_list is None or course_list is None or skills_json is None:
+        return HttpResponse("couldn't find your linkedin data, please <a href="+request.META['HTTP_HOST']+" >try again</a>")
+    else:
+        return render(request, "results.html", {'skill_list': final_list, 'course_list': course_list[:50], 'skills_json': SafeString(skills_json)})
+    
+
 
 def flarify(tuples):
     children = []
 #print "++++++++++++++++++++flarify ++++++++++++++++++++++++++++++++" 
-    for i in range(50):
+    for i in range(min(50,len(tuples))):
 #print tuples[i]
         children.append({"name": tuples[i][0], "size": tuples[i][1]})
     flare_dict = {"name": "flare", "children": children}
