@@ -2,4 +2,4 @@
 *.swp
 .*.swp
 *.py~
-
+.DS_STORE

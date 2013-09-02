@@ -2,7 +2,9 @@ from bs4 import BeautifulSoup
 import json
 import eventlet
 from eventlet.green import urllib
+from scraper.models import publicSkills
 
+manager = publicSkills.objects
 coursera_courses_json = json.loads(urllib.urlopen("https://www.coursera.org/maestro/api/topic/list?full=1").read())
 coursera_class_base_url = "https://www.coursera.org/course/"
 exclusion_list = ['Microsoft Office', 'Microsoft Word', 'PowerPoint', 'Microsoft Excel', 'Photoshop', 'Word', 'Research', 'Teamwork', 'Customer Service', 'Time Management', 'Excel', 'Office', 'MIPS', 'Facebook', 'English', 'Editing', 'Outlook', 'Google Docs', 'Windows'] #skills we don't think are of interest to our users
@@ -34,7 +36,22 @@ def scrub_html(text):
     return skill_list
 
 def fetch_and_scrub(url):
-    return scrub_html(fetch_html(url))
+    matches = manager.filter(puburl=url)
+    if len(matches) > 1:
+        print "FOUND DUPLICATE URL IN DATABASE"
+    elif len(matches) == 1:
+        print "found url {0} in database".format(url)
+        prev = matches[0]
+        skill_list = json.loads(prev.skills)
+        print skill_list
+        return skill_list
+    else:
+        skill_list = scrub_html(fetch_html(url))
+        print url
+        print skill_list
+        entry = publicSkills(puburl=url, skills = json.dumps(skill_list))
+        entry.save()
+        return skill_list
 
 def find_best_skills(connections_url_list,personal_skill_set):
     #connections_url_list = connections_url_list[:100] # for dev purposes
