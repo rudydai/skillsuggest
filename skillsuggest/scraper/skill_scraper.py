@@ -43,12 +43,12 @@ def fetch_and_scrub(url):
         print "found url {0} in database".format(url)
         prev = matches[0]
         skill_list = json.loads(prev.skills)
-        print skill_list
+#print skill_list
         return skill_list
     else:
         skill_list = scrub_html(fetch_html(url))
-        print url
-        print skill_list
+#print url
+#print skill_list
         entry = publicSkills(puburl=url, skills = json.dumps(skill_list))
         entry.save()
         return skill_list
